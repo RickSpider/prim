@@ -1,0 +1,45 @@
+<?page title="productoModal" contentType="text/html;charset=UTF-8"?>
+
+<?component name="finder" templateURI="/doxacore/zul/component/finder.zul"?>
+
+<zk>
+
+
+	<window title="Producto Crear/Ver/Editar" border="normal"
+		position="center,center" closable="true" mode="modal"
+		action="show: slideDown;hide: slideUp" width="500px">
+
+		<tablelayout columns="2">
+
+			<tablechildren>
+				<label value="ID:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@load(vm.productoSelected.productoid)" readonly="true" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Nombre:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.productoSelected.nombre)" />
+			</tablechildren>
+			
+			
+		</tablelayout>
+
+		<space height="10px" />
+
+		<hlayout>
+
+			<button label="Aceptar" onClick="@command('guardar')" />
+
+		</hlayout>
+
+
+
+
+	</window>
+</zk>

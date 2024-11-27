@@ -1,0 +1,108 @@
+<?page title="Productos" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window title="Producto" border="normal"
+		viewModel="@id('vm') @init('com.prim.sistema.abm.ProductoVM')"
+		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<hlayout vflex="1">
+
+			<vlayout hflex="1" vflex="1">
+
+				<hbox pack="end" hflex="1">
+
+					<button label="Agregar" iconSclass=" z-icon-plus"
+						onClick="@command('modalProductoAgregar')"
+						disabled="@load(!vm.opCrearProducto)" />
+
+				</hbox>
+
+				<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
+					vflex="1" model="@load(vm.lProductos)" checkmark="true">
+
+					
+
+					<listhead >
+
+						<listheader hflex="min" align="center" />
+						<listheader label="ID" align="center"
+							hflex="min"  />
+						<listheader label="NOMBRE" align="center" />
+						
+						<listheader hflex="min" />
+
+					</listhead>
+
+					<auxhead>
+
+						<auxheader />
+						<auxheader > 
+							<textbox value="@bind(vm.filtroColumns[0])"
+								instant="true" onChange="@command('filtrarProducto')"
+								hflex="1" />
+						</auxheader>
+						<auxheader>
+							<textbox value="@bind(vm.filtroColumns[1])"
+								instant="true" onChange="@command('filtrarProducto')"
+								hflex="1" />
+						</auxheader>
+
+						
+					
+						<auxheader />
+
+					</auxhead>
+
+					<template name="model">
+
+						<listitem>
+							<listcell />
+							<listcell label="@load(each[0])" style="text-align: right;"/>
+							<listcell label="@load(each[1])" style="text-align: left;"/>
+							
+
+
+							<listcell>
+								<hlayout>
+																		
+									<button iconSclass="z-icon-edit"
+										onClick="@command('modalProducto', productoid=each[0])"
+										tooltiptext="Editar"
+										disabled="@load(!vm.opEditarProducto)" />
+									<button iconSclass="z-icon-trash-o"
+										class="doxa-button-red"
+										onClick="@command('borrarConfirmacion', dato=each[0])"
+										tooltiptext="Borrar"
+										disabled="@load(!vm.opBorrarProducto)" />
+
+								</hlayout>
+
+
+							</listcell>
+
+
+						</listitem>
+
+
+					</template>
+
+					<listfoot>
+						<listfooter span="2" align="left">
+							<hlayout>
+								<label
+									value="@load(vm.lProductos.size())" />
+								<label value="items" />
+							</hlayout>
+						</listfooter>
+					</listfoot>
+
+
+				</listbox>
+
+			</vlayout>
+
+
+
+		</hlayout>
+
+	</window>
+</zk>

@@ -1,0 +1,8 @@
+<language-addon>
+
+    <addon-name>patch-addon</addon-name><!-- give a meaningful name -->
+    <language-name>xul/html</language-name>
+    <depends>zul</depends>
+    <javascript src="/zkpatch/zkcal-124.js"/>
+
+</language-addon>

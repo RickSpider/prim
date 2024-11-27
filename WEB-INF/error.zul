@@ -1,0 +1,22 @@
+<?page title="error" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window
+		title="Error ${requestScope['jakarta.servlet.error.status_code']}"
+		width="50%" border="normal" mode="modal" closable="true">
+		<vlayout>
+			Excepción tipo KillerApp error:
+			${requestScope['jakarta.servlet.error.exception']}
+			<hlayout style="margin-left:auto; margin-right:auto">
+				<button label="Aceptar" onClick="spaceOwner.detach()" />
+				
+			</hlayout>
+		</vlayout>
+
+		<!-- optional: record the error for improving the app -->
+		<zscript>
+			org.zkoss.util.logging.Log.lookup("Fatal").error(requestScope.get("jakarta.servlet.error.exception"));
+			
+		</zscript>
+	</window>
+</zk>
+

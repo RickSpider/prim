@@ -1,0 +1,19 @@
+<zk>
+
+	<hbox pack="center" align="center" hflex="1" vflex="1">
+
+	<window width="100%" title="Session Timeout" border="normal">
+		<caption image="/doxacore/img/sadClock.png" label="Hi there!"/>
+		<vbox>
+			La página no está disponible. Esto se debe a que ha expirado
+			el tiempo o se ha reiniciado el servidor, debe volver a
+			iniciar sesión.
+
+			<a href="/"
+				label="[Iniciar sesión]" autodisable="self" />
+
+		</vbox>
+	</window>
+	
+	</hbox>
+</zk>
