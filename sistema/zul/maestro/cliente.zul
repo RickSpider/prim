@@ -1,8 +1,10 @@
 <?page title="Clientes" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Cliente" border="normal"
-		viewModel="@id('vm') @init('com.prim.sistema.abm.ClienteVM')"
+	<window border="normal"
+		viewModel="@id('vm') @init('com.prim.sistema.maestro.ClienteVM')"
 		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+		
+		<caption label="Cliente" style="font-weight:bold"/>
 
 		<hlayout vflex="1">
 
@@ -28,6 +30,8 @@
 							hflex="min"  />
 						<listheader label="RAZON SOCIAL" align="center" />
 						<listheader label="DOCUMENTO #" align="center" />
+						<listheader label="TELEFONO" align="center" />
+						<listheader label="EMAIL" align="center" />
 						
 						<listheader hflex="min" />
 
@@ -47,8 +51,20 @@
 								hflex="1" />
 						</auxheader>
 						
-							<auxheader>
+						<auxheader>
 							<textbox value="@bind(vm.filtroColumns[2])"
+								instant="true" onChange="@command('filtrarCliente')"
+								hflex="1" />
+						</auxheader>
+						
+						<auxheader>
+							<textbox value="@bind(vm.filtroColumns[3])"
+								instant="true" onChange="@command('filtrarCliente')"
+								hflex="1" />
+						</auxheader>
+						
+						<auxheader>
+							<textbox value="@bind(vm.filtroColumns[4])"
 								instant="true" onChange="@command('filtrarCliente')"
 								hflex="1" />
 						</auxheader>
@@ -66,6 +82,8 @@
 							<listcell label="@load(each[0])" style="text-align: right;"/>
 							<listcell label="@load(each[1])" style="text-align: left;"/>
 							<listcell label="@load(each[2])" style="text-align: center;"/>
+							<listcell label="@load(each[3])" style="text-align: left;"/>
+							<listcell label="@load(each[4])" style="text-align: center;"/>
 							
 
 

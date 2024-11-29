@@ -20,6 +20,16 @@ public class ParamsLocal extends Params {
 	
 	//SIGLA TIPOTIPOS
 	
+	public static final String SIGLA_TIPOTIPO_DOCUMENTO = "DOCUMENTO";
+	public static final String SIGLA_TIPO_DOCUMENTO_RUC = "DOCUMENTO_RUC";
+	public static final String SIGLA_TIPO_DOCUMENTO_CI = "DOCUMENTO_CI";
+	
+	public static final String SIGLA_TIPOTIPO_INSUMO = "INSUMO";
+	public static final String SIGLA_TIPO_INSUMO_INSUMO = "INSUMO_INSUMO";
+	public static final String SIGLA_TIPO_INSUMO_MANOOBRA = "INSUMO_MANOOBRA";
+
+	
+	//OPERACIONES
 	public static final String OP_CREAR_PRODUCTO = "CrearProducto";
 	public static final String OP_EDITAR_PRODUCTO = "EditarProducto";
 	public static final String OP_BORRAR_PRODUCTO = "BorrarProducto";
@@ -27,6 +37,10 @@ public class ParamsLocal extends Params {
 	public static final String OP_CREAR_CLIENTE = "CrearCliente";
 	public static final String OP_EDITAR_CLIENTE = "EditarCliente";
 	public static final String OP_BORRAR_CLIENTE = "BorrarCliente";
+	
+	public static final String OP_CREAR_INSUMO = "CrearInsumo";
+	public static final String OP_EDITAR_INSUMO = "EditarInsumo";
+	public static final String OP_BORRAR_INSUMO = "BorrarInsumo";
 
 	
 }

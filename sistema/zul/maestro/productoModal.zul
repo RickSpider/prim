@@ -1,13 +1,15 @@
-<?page title="clienteModal" contentType="text/html;charset=UTF-8"?>
+<?page title="productoModal" contentType="text/html;charset=UTF-8"?>
 
 <?component name="finder" templateURI="/doxacore/zul/component/finder.zul"?>
 
 <zk>
 
 
-	<window title="Cliente Crear/Ver/Editar" border="normal"
+	<window border="normal"
 		position="center,center" closable="true" mode="modal"
 		action="show: slideDown;hide: slideUp" width="500px">
+		
+		<caption label="Producto Crear/Ver/Editar" style="font-weight:bold"/>
 
 		<tablelayout columns="2">
 
@@ -16,7 +18,7 @@
 			</tablechildren>
 
 			<tablechildren>
-				<textbox value="@load(vm.clienteSelected.clienteid)" readonly="true" />
+				<textbox value="@load(vm.productoSelected.productoid)" readonly="true" />
 			</tablechildren>
 			
 			<tablechildren>
@@ -24,16 +26,7 @@
 			</tablechildren>
 
 			<tablechildren>
-				<textbox value="@bind(vm.clienteSelected.razonSocial)" />
-			</tablechildren>
-			
-			
-			<tablechildren>
-				<label value="Documento #" style="font-weight:bold" />
-			</tablechildren>
-
-			<tablechildren>
-				<textbox value="@bind(vm.clienteSelected.documentoNum)" />
+				<textbox value="@bind(vm.productoSelected.nombre)" />
 			</tablechildren>
 			
 			

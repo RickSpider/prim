@@ -1,4 +1,4 @@
-package com.prim.sistema.abm;
+package com.prim.sistema.maestro;
 
 import java.util.List;
 

@@ -1,8 +1,10 @@
-<?page title="Productos" contentType="text/html;charset=UTF-8"?>
+<?page title="Insumos" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<window title="Producto" border="normal"
-		viewModel="@id('vm') @init('com.prim.sistema.abm.ProductoVM')"
+	<window border="normal"
+		viewModel="@id('vm') @init('com.prim.sistema.maestro.InsumoVM')"
 		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
+
+		<caption label="Insumo" style="font-weight:bold"/>
 
 		<hlayout vflex="1">
 
@@ -11,13 +13,13 @@
 				<hbox pack="end" hflex="1">
 
 					<button label="Agregar" iconSclass=" z-icon-plus"
-						onClick="@command('modalProductoAgregar')"
-						disabled="@load(!vm.opCrearProducto)" />
+						onClick="@command('modalInsumoAgregar')"
+						disabled="@load(!vm.opCrearInsumo)" />
 
 				</hbox>
 
 				<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
-					vflex="1" model="@load(vm.lProductos)" checkmark="true">
+					vflex="1" model="@load(vm.lInsumos)" checkmark="true">
 
 					
 
@@ -27,6 +29,7 @@
 						<listheader label="ID" align="center"
 							hflex="min"  />
 						<listheader label="NOMBRE" align="center" />
+						<listheader label="PRECIO" align="center" />
 						
 						<listheader hflex="min" />
 
@@ -37,15 +40,20 @@
 						<auxheader />
 						<auxheader > 
 							<textbox value="@bind(vm.filtroColumns[0])"
-								instant="true" onChange="@command('filtrarProducto')"
+								instant="true" onChange="@command('filtrarInsumo')"
 								hflex="1" />
 						</auxheader>
 						<auxheader>
 							<textbox value="@bind(vm.filtroColumns[1])"
-								instant="true" onChange="@command('filtrarProducto')"
+								instant="true" onChange="@command('filtrarInsumo')"
 								hflex="1" />
 						</auxheader>
-
+						
+						<auxheader>
+							<textbox value="@bind(vm.filtroColumns[2])"
+								instant="true" onChange="@command('filtrarInsumo')"
+								hflex="1" />
+						</auxheader>
 						
 					
 						<auxheader />
@@ -58,6 +66,7 @@
 							<listcell />
 							<listcell label="@load(each[0])" style="text-align: right;"/>
 							<listcell label="@load(each[1])" style="text-align: left;"/>
+							<listcell label="@load(each[2])" style="text-align: right;"/>
 							
 
 
@@ -65,14 +74,14 @@
 								<hlayout>
 																		
 									<button iconSclass="z-icon-edit"
-										onClick="@command('modalProducto', productoid=each[0])"
+										onClick="@command('modalInsumo', insumoid=each[0])"
 										tooltiptext="Editar"
-										disabled="@load(!vm.opEditarProducto)" />
+										disabled="@load(!vm.opEditarInsumo)" />
 									<button iconSclass="z-icon-trash-o"
 										class="doxa-button-red"
 										onClick="@command('borrarConfirmacion', dato=each[0])"
 										tooltiptext="Borrar"
-										disabled="@load(!vm.opBorrarProducto)" />
+										disabled="@load(!vm.opBorrarInsumo)" />
 
 								</hlayout>
 
@@ -89,7 +98,7 @@
 						<listfooter span="2" align="left">
 							<hlayout>
 								<label
-									value="@load(vm.lProductos.size())" />
+									value="@load(vm.lInsumos.size())" />
 								<label value="items" />
 							</hlayout>
 						</listfooter>

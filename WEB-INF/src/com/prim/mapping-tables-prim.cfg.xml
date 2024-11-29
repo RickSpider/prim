@@ -1,2 +1,8 @@
-<mapping class="com.prim.modelo.Producto" />
+
 <mapping class="com.prim.modelo.Cliente" />
+<mapping class="com.prim.modelo.Funcionario" />
+<mapping class="com.prim.modelo.Insumo" />
+<mapping class="com.prim.modelo.Presupuesto" />
+<mapping class="com.prim.modelo.Calculo" />
+<mapping class="com.prim.modelo.CalculoInsumo" />
+

@@ -6,7 +6,7 @@
 
 	<!-- Para crear mas menus copiar en nav y solo cambiar el label y el icono -->
 	
-	<nav label="ABM" iconSclass="z-icon-home"
+	<nav label="Maestro" iconSclass="z-icon-home"
 		children="@load(vm.pageMap[self.label].values()) @template('navitem')"
 		visible="@load(vm.menuVisible( vm.pageMap[self.label].values().size() ))" />
 

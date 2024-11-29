@@ -1,0 +1,90 @@
+<?page title="clienteModal" contentType="text/html;charset=UTF-8"?>
+
+<?component name="finder" templateURI="/doxacore/zul/component/finder.zul"?>
+
+<zk>
+
+
+	<window border="normal"
+		position="center,center" closable="true" mode="modal"
+		action="show: slideDown;hide: slideUp" width="500px">
+		
+		<caption label="Cliente Crear/Ver/Editar" style="font-weight:bold"/>
+
+		<tablelayout columns="2">
+
+			<tablechildren>
+				<label value="ID:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@load(vm.clienteSelected.clienteid)" readonly="true" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Nombre:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.clienteSelected.razonSocial)" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Documento Tipo:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+					<finder	finderValue="@load(vm.clienteSelected.documentoTipo.tipo)"
+								finderModel="@init(vm.documentoTipoFinder)" />
+			</tablechildren>
+
+			<tablechildren>
+				<label value="Documento #:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.clienteSelected.documentoNum)" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Email:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.clienteSelected.email)" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Telefono:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.clienteSelected.telefono)" />
+			</tablechildren>
+			
+			<tablechildren>
+				<label value="Direccion:" style="font-weight:bold" />
+			</tablechildren>
+
+			<tablechildren>
+				<textbox value="@bind(vm.clienteSelected.direccion)" />
+			</tablechildren>
+			
+			
+			
+			
+		</tablelayout>
+
+		<space height="10px" />
+
+		<hlayout>
+
+			<button label="Aceptar" onClick="@command('guardar')" />
+
+		</hlayout>
+
+
+
+
+	</window>
+</zk>

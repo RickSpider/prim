@@ -1,4 +1,4 @@
-package com.prim.sistema.abm;
+package com.prim.sistema.maestro;
 
 import java.util.List;
 
@@ -16,6 +16,8 @@ import org.zkoss.zk.ui.util.Notification;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
+import com.doxacore.components.finder.FinderModel;
+import com.doxacore.modelo.Tipo;
 import com.prim.modelo.Cliente;
 import com.prim.util.ParamsLocal;
 import com.prim.util.TemplateViewModelLocal;
@@ -62,7 +64,7 @@ public class ClienteVM extends TemplateViewModelLocal{
 
 	private void inicializarFiltros() {
 
-		this.filtroColumns = new String[2];
+		this.filtroColumns = new String[5];
 
 		for (int i = 0; i < this.filtroColumns.length; i++) {
 
@@ -111,6 +113,8 @@ public class ClienteVM extends TemplateViewModelLocal{
 
 	@Command
 	public void modalCliente(@BindingParam("clienteid") long clienteid) {
+		
+		this.inicializarFinders();
 
 		if (clienteid != -1) {
 
@@ -127,7 +131,7 @@ public class ClienteVM extends TemplateViewModelLocal{
 			
 		}
 
-		modal = (Window) Executions.createComponents("/sistema/zul/abm/clienteModal.zul", this.mainComponent, null);
+		modal = (Window) Executions.createComponents("/sistema/zul/maestro/clienteModal.zul", this.mainComponent, null);
 		Selectors.wireComponents(modal, this, false);
 		modal.doModal();
 
@@ -198,7 +202,55 @@ public class ClienteVM extends TemplateViewModelLocal{
 		
 		System.out.println("=====Fin Borrado=========");
 	}
+	
+	private FinderModel documentoTipoFinder;
 
+	@NotifyChange("*")
+	public void inicializarFinders() {
+
+		String sqlDocumentoTipo = this.um.getCoreSql("buscarTiposPorSiglaTipotipo.sql").replace("?1", ParamsLocal.SIGLA_TIPOTIPO_DOCUMENTO );
+		documentoTipoFinder = new FinderModel("Documento", sqlDocumentoTipo);
+
+	}
+
+	public void generarFinders(@BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.documentoTipoFinder.getNameFinder()) == 0) {
+
+			this.documentoTipoFinder.generarListFinder();
+			BindUtils.postNotifyChange(null, null, this.documentoTipoFinder, "listFinder");
+
+			return;
+		}
+
+	}
+
+	@Command
+	public void finderFilter(@BindingParam("filter") String filter, @BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.documentoTipoFinder.getNameFinder()) == 0) {
+
+			this.documentoTipoFinder.setListFinder(this.filtrarListaObject(filter, this.documentoTipoFinder.getListFinderOri()));
+			BindUtils.postNotifyChange(null, null, this.documentoTipoFinder, "listFinder");
+
+			return;
+		}
+
+	}
+
+	@Command
+	@NotifyChange("*")
+	public void onSelectetItemFinder(@BindingParam("id") Long id, @BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.documentoTipoFinder.getNameFinder()) == 0) {
+
+			this.clienteSelected.setDocumentoTipo(this.reg.getObjectById(Tipo.class.getName(), id));
+			
+			return;
+		}
+
+	}
+	
 	public List<Object[]> getlClientes() {
 		return lClientes;
 	}
@@ -253,6 +305,14 @@ public class ClienteVM extends TemplateViewModelLocal{
 
 	public void setClienteSelected(Cliente clienteSelected) {
 		this.clienteSelected = clienteSelected;
+	}
+
+	public FinderModel getDocumentoTipoFinder() {
+		return documentoTipoFinder;
+	}
+
+	public void setDocumentoTipoFinder(FinderModel documentoTipoFinder) {
+		this.documentoTipoFinder = documentoTipoFinder;
 	}
 	
 	
