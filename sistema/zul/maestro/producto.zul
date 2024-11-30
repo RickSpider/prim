@@ -1,7 +1,7 @@
-<?page title="Insumos" contentType="text/html;charset=UTF-8"?>
+<?page title="Productos" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window border="normal"
-		viewModel="@id('vm') @init('com.prim.sistema.abm.InsumoVM')"
+		viewModel="@id('vm') @init('com.prim.sistema.abm.ProductoVM')"
 		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
 		
 		<caption label="Producto" style="font-weight:bold"/>
@@ -14,13 +14,13 @@
 				<hbox pack="end" hflex="1">
 
 					<button label="Agregar" iconSclass=" z-icon-plus"
-						onClick="@command('modalInsumoAgregar')"
-						disabled="@load(!vm.opCrearInsumo)" />
+						onClick="@command('modalProductoAgregar')"
+						disabled="@load(!vm.opCrearProducto)" />
 
 				</hbox>
 
 				<listbox emptyMessage="lista vacía..." mold="paging" autopaging="true"
-					vflex="1" model="@load(vm.lInsumos)" checkmark="true">
+					vflex="1" model="@load(vm.lProductos)" checkmark="true">
 
 					
 
@@ -40,12 +40,12 @@
 						<auxheader />
 						<auxheader > 
 							<textbox value="@bind(vm.filtroColumns[0])"
-								instant="true" onChange="@command('filtrarInsumo')"
+								instant="true" onChange="@command('filtrarProducto')"
 								hflex="1" />
 						</auxheader>
 						<auxheader>
 							<textbox value="@bind(vm.filtroColumns[1])"
-								instant="true" onChange="@command('filtrarInsumo')"
+								instant="true" onChange="@command('filtrarProducto')"
 								hflex="1" />
 						</auxheader>
 
@@ -68,14 +68,14 @@
 								<hlayout>
 																		
 									<button iconSclass="z-icon-edit"
-										onClick="@command('modalInsumo', insumoid=each[0])"
+										onClick="@command('modalProducto', productoid=each[0])"
 										tooltiptext="Editar"
-										disabled="@load(!vm.opEditarInsumo)" />
+										disabled="@load(!vm.opEditarProducto)" />
 									<button iconSclass="z-icon-trash-o"
 										class="doxa-button-red"
 										onClick="@command('borrarConfirmacion', dato=each[0])"
 										tooltiptext="Borrar"
-										disabled="@load(!vm.opBorrarInsumo)" />
+										disabled="@load(!vm.opBorrarProducto)" />
 
 								</hlayout>
 
@@ -92,7 +92,7 @@
 						<listfooter span="2" align="left">
 							<hlayout>
 								<label
-									value="@load(vm.lInsumos.size())" />
+									value="@load(vm.lProductos.size())" />
 								<label value="items" />
 							</hlayout>
 						</listfooter>

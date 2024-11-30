@@ -41,6 +41,10 @@ public class ParamsLocal extends Params {
 	public static final String OP_CREAR_INSUMO = "CrearInsumo";
 	public static final String OP_EDITAR_INSUMO = "EditarInsumo";
 	public static final String OP_BORRAR_INSUMO = "BorrarInsumo";
+	
+	public static final String OP_CREAR_PRESUPUESTO = "CrearPresupuesto";
+	public static final String OP_EDITAR_PRESUPUESTO = "EditarPresupuesto";
+	public static final String OP_BORRAR_PRESUPUESTO = "BorrarPresupuesto";
 
 	
 }
