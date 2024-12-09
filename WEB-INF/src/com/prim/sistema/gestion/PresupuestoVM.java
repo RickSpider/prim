@@ -2,10 +2,16 @@ package com.prim.sistema.gestion;
 
 import java.util.List;
 
+import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.AfterCompose;
+import org.zkoss.bind.annotation.BindingParam;
+import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
+import org.zkoss.bind.annotation.NotifyChange;
 
-
+import com.doxacore.components.finder.FinderModel;
+import com.prim.modelo.Cliente;
+import com.prim.modelo.Funcionario;
 import com.prim.modelo.Presupuesto;
 import com.prim.util.ParamsLocal;
 import com.prim.util.TemplateViewModelLocal;
@@ -19,13 +25,14 @@ public class PresupuestoVM extends TemplateViewModelLocal{
 	
 	private boolean editar = false;
 	
-	private List<Object[]> lPresupuestos;
-	private List<Object[]> lPresupuestosOri;
-	private Presupuesto prespuestoSelected;
+
+	private Presupuesto presupuestoSelected;
 
 	@Init(superclass = true)
 	public void initPresupuestoVM() {
 
+		this.presupuestoSelected = new Presupuesto();
+		this.inicializarFinders();
 		
 	
 	}
@@ -46,16 +53,82 @@ public class PresupuestoVM extends TemplateViewModelLocal{
 	}
 	
 	
-	
+	private FinderModel clienteFinder;
+	private FinderModel funcionarioFinder;
 
+	@NotifyChange("*")
+	public void inicializarFinders() {
 
-	public List<Object[]> getlPresupuestos() {
-		return lPresupuestos;
+		String sqlCliente = this.um.getSql("cliente/buscarClientes.sql");
+		clienteFinder = new FinderModel("Cliente", sqlCliente);
+		
+		String sqlFuncionario = this.um.getSql("funcionario/buscarFuncionarios.sql");
+		funcionarioFinder = new FinderModel("Funcionario", sqlFuncionario);
+
 	}
 
-	public void setlPresupuestos(List<Object[]> lPresupuestos) {
-		this.lPresupuestos = lPresupuestos;
+	public void generarFinders(@BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.clienteFinder.getNameFinder()) == 0) {
+
+			this.clienteFinder.generarListFinder();
+			BindUtils.postNotifyChange(null, null, this.clienteFinder, "listFinder");
+
+			return;
+		}
+		
+
+		if (finder.compareTo(this.funcionarioFinder.getNameFinder()) == 0) {
+
+			this.funcionarioFinder.generarListFinder();
+			BindUtils.postNotifyChange(null, null, this.funcionarioFinder, "listFinder");
+
+			return;
+		}
+
 	}
+
+	@Command
+	public void finderFilter(@BindingParam("filter") String filter, @BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.clienteFinder.getNameFinder()) == 0) {
+
+			this.clienteFinder.setListFinder(this.filtrarListaObject(filter, this.clienteFinder.getListFinderOri()));
+			BindUtils.postNotifyChange(null, null, this.clienteFinder, "listFinder");
+
+			return;
+		}
+		
+		if (finder.compareTo(this.funcionarioFinder.getNameFinder()) == 0) {
+
+			this.funcionarioFinder.setListFinder(this.filtrarListaObject(filter, this.funcionarioFinder.getListFinderOri()));
+			BindUtils.postNotifyChange(null, null, this.funcionarioFinder, "listFinder");
+
+			return;
+		}
+
+	}
+
+	@Command
+	@NotifyChange("*")
+	public void onSelectetItemFinder(@BindingParam("id") Long id, @BindingParam("finder") String finder) {
+
+		if (finder.compareTo(this.clienteFinder.getNameFinder()) == 0) {
+
+			this.presupuestoSelected.setCliente(this.reg.getObjectById(Cliente.class.getName(), id));
+			
+			return;
+		}
+		
+		if (finder.compareTo(this.funcionarioFinder.getNameFinder()) == 0) {
+
+			this.presupuestoSelected.setFuncionario(this.reg.getObjectById(Funcionario.class.getName(), id));
+			
+			return;
+		}
+
+	}
+
 
 	public boolean isOpCrearPresupuesto() {
 		return opCrearPresupuesto;
@@ -90,12 +163,29 @@ public class PresupuestoVM extends TemplateViewModelLocal{
 	}
 
 	public Presupuesto getPresupuestoSelected() {
-		return prespuestoSelected;
+		return presupuestoSelected;
 	}
 
-	public void setPresupuestoSelected(Presupuesto prespuestoSelected) {
-		this.prespuestoSelected = prespuestoSelected;
+	public void setPresupuestoSelected(Presupuesto presupuestoSelected) {
+		this.presupuestoSelected = presupuestoSelected;
 	}
+
+	public FinderModel getClienteFinder() {
+		return clienteFinder;
+	}
+
+	public void setClienteFinder(FinderModel clienteFinder) {
+		this.clienteFinder = clienteFinder;
+	}
+
+	public FinderModel getFuncionarioFinder() {
+		return funcionarioFinder;
+	}
+
+	public void setFuncionarioFinder(FinderModel funcionarioFinder) {
+		this.funcionarioFinder = funcionarioFinder;
+	}
+
 	
 	
 

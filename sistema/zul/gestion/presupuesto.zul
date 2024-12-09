@@ -1,13 +1,205 @@
-<?page title="Insumos" contentType="text/html;charset=UTF-8"?>
+<?page title="Presupuesto" contentType="text/html;charset=UTF-8"?>
+
+<?component name="finder" templateURI="/doxacore/zul/component/finder.zul"?>
 <zk>
 	<window border="normal"
 		viewModel="@id('vm') @init('com.prim.sistema.gestion.PresupuestoVM')"
 		vflex="1" id="Body" apply="org.zkoss.bind.BindComposer">
-		
-		<caption label="Producto" style="font-weight:bold"/>
+
+		<caption label="Presupuesto" style="font-weight:bold" />
+
+		<vlayout vflex="1">
+
+			<hlayout>
+
+				<tablelayout columns="4">
+
+					<tablechildren>
+						<label value="Fecha:" style="font-weight:bold" />
+					</tablechildren>
+
+					<tablechildren>
+						<datebox
+							value="@bind(vm.presupuestoSelected.fecha)" />
+					</tablechildren>
 
 
-		
+					<tablechildren>
+						<label value="Funcionario:"
+							style="font-weight:bold" />
+					</tablechildren>
+
+					<tablechildren>
+						<textbox value="" />
+					</tablechildren>
+
+
+					<tablechildren>
+						<label value="Nº Interno:"
+							style="font-weight:bold" />
+					</tablechildren>
+
+					<tablechildren>
+						<textbox
+							value="@bind(vm.presupuestoSelected.numeroInterno)" />
+					</tablechildren>
+
+
+					<tablechildren>
+						<label value="Cliente:"
+							style="font-weight:bold" />
+					</tablechildren>
+
+					<tablechildren>
+						<finder
+							finderValue="@load(vm.presupuestoSelected.cliente)"
+							finderModel="@init(vm.clienteFinder)" />
+					</tablechildren>
+
+
+				</tablelayout>
+
+				<listbox emptyMessage="lista vacía..." mold="paging"
+					autopaging="true" height="150px" hflex="1" checkmark="true">
+
+
+					
+
+					<listhead>
+
+						<listheader hflex="min" />
+
+						<listheader label="Descripcion" align="center" />
+						<listheader label="Cantidad" hflex="min"
+							align="center" />
+						<listheader label="Unitario" hflex="min"
+							align="center" />
+						<listheader label="total" hflex="min"
+							align="center" />
+
+						<listheader hflex="min" >
+						
+							<button iconSclass="z-icon-plus"
+											class="doxa-button-green" onClick="@command('agregarInsumo')"
+											tooltiptext="Agregar Detalle" />
+							
+						</listheader>
+
+					</listhead>
+
+
+
+
+					<listitem>
+						<listcell />
+						<listcell label="" style="text-align: right;" />
+						<listcell label="" style="text-align: right;" />
+						<listcell label="" style="text-align: right;" />
+						<listcell label="" style="text-align: right;" />
+
+						<listcell>
+							<hlayout>
+
+								<button iconSclass="z-icon-trash-o"
+									class="doxa-button-red"
+									onClick="@command('borrarConfirmacion', dato=each[0])"
+									tooltiptext="Borrar" />
+
+							</hlayout>
+
+
+						</listcell>
+
+
+					</listitem>
+
+				</listbox>
+
+			</hlayout>
+
+			<listbox emptyMessage="lista vacía..." mold="paging"
+				autopaging="true" vflex="1" hflex="1" checkmark="true">
+				
+				<auxhead>
+
+						<auxheader colspan="6">
+
+							<tablelayout columns="7">
+
+								<tablechildren>
+									<label value="Insumo:"
+										style="font-weight:bold" />
+								</tablechildren>
+
+								<tablechildren>
+
+									
+
+								</tablechildren>
+								
+								<tablechildren>
+									<button iconSclass="z-icon-plus"
+										class="doxa-button-green" onClick="@command('agregarInsumo')"
+										tooltiptext="Agregar Calculo" />
+								</tablechildren>
+
+							</tablelayout>
+
+
+
+						</auxheader>
+
+					</auxhead>
+
+
+
+				<listhead>
+
+					<listheader hflex="min" />
+
+					<listheader label="Insumo" align="center" />
+					<listheader label="Cantidad" hflex="min"
+						align="center" />
+					<listheader label="Unitario" hflex="min"
+						align="center" />
+					<listheader label="total" hflex="min"
+						align="center" />
+
+					<listheader hflex="min" />
+
+				</listhead>
+
+
+
+
+				<listitem>
+					<listcell />
+					<listcell label="" style="text-align: right;" />
+					<listcell label="" style="text-align: right;" />
+					<listcell label="" style="text-align: right;" />
+					<listcell label="" style="text-align: right;" />
+
+					<listcell>
+						<hlayout>
+
+							
+							<button iconSclass="z-icon-trash-o"
+								class="doxa-button-red"
+								onClick="@command('borrarConfirmacion', dato=each[0])"
+								tooltiptext="Borrar" />
+
+						</hlayout>
+
+
+					</listcell>
+
+
+				</listitem>
+
+			</listbox>
+
+		</vlayout>
+
 
 	</window>
 </zk>
